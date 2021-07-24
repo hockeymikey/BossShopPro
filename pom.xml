@@ -31,8 +31,17 @@
 			</plugin>
 		</plugins>
 	</build>
-
+	<distributionManagement>
+	    <repository>
+	      <id>hockeymikey-repo</id>
+	      <url>https://maven.hockeymikey.com/snapshots</url>
+	    </repository>
+	</distributionManagement>
 	<repositories>
+		<repository>
+		    <id>BenCodez Repo</id>
+		    <url>https://nexus.bencodez.com/repository/maven-public</url>
+		</repository>
 		<repository>
 			<id>repo</id>
 			<url>https://repo.glaremasters.me/repository/public/</url>
@@ -57,6 +66,10 @@
 			<id>spigot-repo</id>
 			<url>https://hub.spigotmc.org/nexus/content/repositories/snapshots/</url>
 		</repository>
+        <repository>
+            <id>hockeymikey-repo</id>
+            <url>https://maven.hockeymikey.com/snapshots</url>
+        </repository>
 	</repositories>
 
 	<dependencies>
@@ -64,7 +77,7 @@
         <dependency>
             <groupId>org.spigotmc</groupId>
             <artifactId>spigot-api</artifactId>
-            <version>1.16.1-R0.1-SNAPSHOT</version>
+            <version>1.17.1-R0.1-SNAPSHOT</version>
             <scope>provided</scope>
         </dependency>
 
@@ -127,7 +140,7 @@
 		<dependency>
 			<groupId>org.black_ixx</groupId>
 			<artifactId>PlayerPoints</artifactId>
-			<version>2.1.4</version>
+			<version>2.2.0-SNAPSHOT</version>
 			<scope>provided</scope>
 		</dependency>
 
@@ -141,12 +154,11 @@
 
 		<!-- Adds voting plugin support -->
 		<dependency>
-			<groupId>com.github.Ben12345rocks</groupId>
-			<artifactId>VotingPlugin</artifactId>
-			<version>LATEST</version>
-			<scope>provided</scope>
+		    <groupId>com.bencodez</groupId>
+		    <artifactId>votingplugin</artifactId>
+		    <version>6.5.2</version>
+		    <scope>provided</scope>
 		</dependency>
-
 		<!-- Adds command points support -->
 		<dependency>
 			<groupId>pgDev.bukkit</groupId>
