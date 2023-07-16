@@ -107,7 +107,8 @@ public class ItemStackTranslator {
                         current = next;
                     }
                 }
-                goal.add(current);
+                if(current != null)
+                    goal.add(current);
 
             }
 
