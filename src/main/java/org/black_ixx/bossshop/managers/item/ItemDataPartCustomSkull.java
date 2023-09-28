@@ -25,7 +25,7 @@ public class ItemDataPartCustomSkull extends ItemDataPart {
         }
 
         ItemMeta skullMeta = i.getItemMeta();
-        GameProfile profile = new GameProfile(UUID.randomUUID(), null);
+        GameProfile profile = new GameProfile(UUID.randomUUID(), "customSkull");
 
         Property property = input.contains("http://textures.minecraft.net/texture") ? getPropertyURL(input) : getProperty(input);
         profile.getProperties().put("textures", property);
