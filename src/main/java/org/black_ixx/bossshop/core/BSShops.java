@@ -9,6 +9,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryView;
+import org.geysermc.api.Geyser;
 
 import java.io.File;
 import java.util.HashMap;
@@ -102,6 +103,9 @@ public class BSShops {
     }
 
     public void openShop(Player p, BSShop shop) {
+        if(shop.hasBedrockMenu() && Geyser.api().isBedrockPlayer(p.getUniqueId())) {
+            shop = getShopFast(shop.getBedrockMenu());
+        }
         int page = 0;
         boolean remember_current_shop = true;
 
