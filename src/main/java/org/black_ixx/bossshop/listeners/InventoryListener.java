@@ -6,19 +6,18 @@ import org.black_ixx.bossshop.core.BSBuy;
 import org.black_ixx.bossshop.core.BSShop;
 import org.black_ixx.bossshop.core.BSShopHolder;
 import org.black_ixx.bossshop.managers.ClassManager;
+import org.black_ixx.bossshop.managers.misc.PacketManager;
 import org.black_ixx.bossshop.misc.MathTools;
 import org.black_ixx.bossshop.misc.Misc;
 import org.black_ixx.bossshop.misc.userinput.BSAnvilHolder;
 import org.black_ixx.bossshop.settings.Settings;
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event.Result;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
-import org.bukkit.event.inventory.ClickType;
-import org.bukkit.event.inventory.InventoryClickEvent;
-import org.bukkit.event.inventory.InventoryCloseEvent;
-import org.bukkit.event.inventory.InventoryDragEvent;
+import org.bukkit.event.inventory.*;
 import org.bukkit.event.inventory.InventoryType.SlotType;
 import org.bukkit.event.player.PlayerEvent;
 import org.bukkit.event.player.PlayerKickEvent;
@@ -57,6 +56,10 @@ public class InventoryListener implements Listener {
 
         if (e.getPlayer() instanceof Player) {
             final Player p = (Player) e.getPlayer();
+
+            if(holder.getShop().removePlayerInventory())
+                PacketManager.restorePlayerInventory(p);
+
             plugin.getClassManager().getMessageHandler().sendMessage("Main.CloseShop", p, null, (Player) e.getPlayer(), holder.getShop(), holder, null);
             new BukkitRunnable() {
                 @Override
@@ -108,9 +111,19 @@ public class InventoryListener implements Listener {
 
 
         BSShopHolder holder = (BSShopHolder) event.getInventory().getHolder();
+        BSShop shop = ((BSShopHolder) event.getInventory().getHolder()).getShop();
 
 
         if (event.getWhoClicked() instanceof Player) {
+
+            if(shop.removePlayerInventory()) {
+                if(event.getClickedInventory() != null && event.getClickedInventory().getType().equals(InventoryType.PLAYER) && event.getCurrentItem() != null) {
+                    event.setCancelled(true);
+                    event.setResult(Result.DENY);
+                    Bukkit.getScheduler().runTaskLater(this.plugin, () -> PacketManager.clearPlayerInventory((Player) event.getWhoClicked()), 1);
+                    return;
+                }
+            }
 
             if (event.getCurrentItem() == null) {
                 return;
@@ -139,8 +152,6 @@ public class InventoryListener implements Listener {
             final Player p = (Player) event.getWhoClicked();
             ClickType clicktype = event.getClick();
 
-
-            BSShop shop = ((BSShopHolder) event.getInventory().getHolder()).getShop();
 
             //Anti spam delay
             if (!p.hasPermission("BossShop.bypasss")) {
