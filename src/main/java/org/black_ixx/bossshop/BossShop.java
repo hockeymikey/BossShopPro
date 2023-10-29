@@ -11,6 +11,7 @@ import org.black_ixx.bossshop.listeners.PlayerListener;
 import org.black_ixx.bossshop.listeners.SignListener;
 import org.black_ixx.bossshop.managers.ClassManager;
 import org.black_ixx.bossshop.managers.CommandManager;
+import org.black_ixx.bossshop.managers.misc.PacketManager;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -79,6 +80,8 @@ public class BossShop extends JavaPlugin {
                 getClassManager().setupDependentClasses();
             }
         }.runTaskLaterAsynchronously(this, 5);
+
+        PacketManager.cancelPacketsForHiddenInventories(this);
     }
 
     @Override
