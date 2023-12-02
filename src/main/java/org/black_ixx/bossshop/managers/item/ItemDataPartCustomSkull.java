@@ -5,6 +5,7 @@ import com.mojang.authlib.properties.Property;
 import org.apache.commons.codec.binary.Base64;
 import org.black_ixx.bossshop.core.BSBuy;
 import org.black_ixx.bossshop.managers.ClassManager;
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -12,6 +13,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.SkullMeta;
 
 import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
@@ -71,7 +73,13 @@ public class ItemDataPartCustomSkull extends ItemDataPart {
                             Iterator<Property> iterator = properties.iterator();
                             if (iterator.hasNext()) {
                                 Property property = iterator.next();
-                                return property.value();
+                                Method getValue;
+                                try {
+                                    getValue = Property.class.getMethod("value");
+                                } catch (NoSuchMethodException e) {
+                                    getValue = Property.class.getMethod("getValue");
+                                }
+                                return (String)getValue.invoke(property);
                             }
                         }
                     }
