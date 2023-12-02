@@ -80,8 +80,8 @@
 		<!-- Platform -->
         <dependency>
             <groupId>org.spigotmc</groupId>
-            <artifactId>spigot-api</artifactId>
-            <version>1.16.1-R0.1-SNAPSHOT</version>
+            <artifactId>spigot</artifactId>
+            <version>1.20.2-R0.1-SNAPSHOT</version>
             <scope>provided</scope>
         </dependency>
 
@@ -92,14 +92,6 @@
 			<version>1.18.28</version>
 			<scope>provided</scope>
 		</dependency>
-
-		<!-- Used for skull -->
-        <dependency>
-            <groupId>org.bukkit</groupId>
-            <artifactId>craftbukkit</artifactId>
-            <version>1.11.2-R0.1-SNAPSHOT</version>
-            <scope>provided</scope>
-        </dependency>
 
 		<!-- Used for data handling -->
         <dependency>

@@ -71,7 +71,7 @@ public class ItemDataPartCustomSkull extends ItemDataPart {
                             Iterator<Property> iterator = properties.iterator();
                             if (iterator.hasNext()) {
                                 Property property = iterator.next();
-                                return property.getValue();
+                                return property.value();
                             }
                         }
                     }
