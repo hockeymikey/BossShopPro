@@ -2,7 +2,10 @@ name: BossShopPro
 version: ${project.version}
 api-version: 1.13
 description: The BOSS Shop Plugin *PRO VERSION*
-author: Black_ixx
+authors:
+  - Black_ixx
+  - Styro457
+  - DreamDevelopments
 website: http://felix.neuby.de
 main: org.black_ixx.bossshop.BossShop
 softdepend: [ProtocolLib, PlayerShopsGUI, ItemShops, ThirdCurrency, GuiShopManager, LimitedUses, TrickyShops, Vault, PlayerPoints, CommandPoints, PointsAPI, TokenEnchant, EnjinMinecraftPlugin, Jobs, Kingdoms, MySQLTokens, MySQL-Tokens, VotingPlugin, SilkSpawners, PlaceholderAPI]
