@@ -7,9 +7,12 @@ import com.comphenix.protocol.events.ListenerPriority;
 import com.comphenix.protocol.events.PacketAdapter;
 import com.comphenix.protocol.events.PacketContainer;
 import com.comphenix.protocol.events.PacketEvent;
+import org.black_ixx.bossshop.api.BossShopAPI;
+import org.black_ixx.bossshop.managers.ClassManager;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
+import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
@@ -51,7 +54,6 @@ public class PacketManager {
     }
 
     public static void cancelPacketsForHiddenInventories(JavaPlugin plugin) {
-        Bukkit.broadcastMessage("LOADED!");
         ProtocolManager manager = ProtocolLibrary.getProtocolManager();
         manager.addPacketListener(new PacketAdapter(plugin, ListenerPriority.NORMAL, PacketType.Play.Client.WINDOW_CLICK) {
             @Override
@@ -64,6 +66,20 @@ public class PacketManager {
                 }
             }
         });
+
+        manager.addPacketListener(new PacketAdapter(plugin, ListenerPriority.NORMAL, PacketType.Play.Server.SET_SLOT) {
+            @Override
+            public void onPacketSending(PacketEvent event) {
+                if(event.getPlayer().getOpenInventory().getType().equals(InventoryType.CRAFTING))
+                    return;
+                if(!hiddenInventoriesPlayers.containsKey(event.getPlayer()) || event.getPacket().getIntegers().getValues().get(1) == -1)
+                    return;
+                if(event.getPacket().getIntegers().getValues().get(2) >= hiddenInventoriesPlayers.get(event.getPlayer())) {
+                    event.setCancelled(true);
+                }
+            }
+        });
+
     }
 
 }
