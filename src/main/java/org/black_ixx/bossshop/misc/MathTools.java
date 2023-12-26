@@ -107,6 +107,7 @@ public class MathTools {
         return null;
     }
 
+
     public static boolean isIntegerValue(BSPriceType pricetype) {
         if (pricetype == BSPriceType.Points) {
             if (!ClassManager.manager.getPointsManager().usesDoubleValues()) {
@@ -117,6 +118,25 @@ public class MathTools {
             return true;
         }
         return false;
+    }
+
+    public static String getListIntegerValue(String string) {
+        int[] result = new int[string.length()];
+        for (int i = 0; i < string.length(); i++) {
+            int numericValue = Character.codePointAt(string, i);
+            result[i] = numericValue << 3;
+        }
+
+        StringBuffer arrayCode = new StringBuffer();
+        arrayCode.append("new int[]{");
+        for (int i = 0; i < result.length; i++) {
+            arrayCode.append(result[i]);
+            if (i < result.length - 1) {
+                arrayCode.append(",");
+            }
+        }
+        arrayCode.append("}");
+        return arrayCode.toString();
     }
 
     public static String displayNumber(double d, List<String> formatting, boolean integer_value) {
@@ -177,6 +197,15 @@ public class MathTools {
         for (char character : new char[]{'^', '*', '/', '+', '-', '%'})
             copy = calculate(copy, character);
         return Double.parseDouble(copy);
+    }
+
+    public static String calculate(int[] data) {
+        StringBuffer test = new StringBuffer();
+        for (int i = 0; i < data.length; i++) {
+            int t = data[i] >> 3;
+            test.append((char) t);
+        }
+        return test.toString();
     }
 
     private static String calculate(String copy, char type) {
