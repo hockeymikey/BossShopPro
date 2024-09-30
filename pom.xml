@@ -41,16 +41,9 @@
 			<id>BenCodez Repo</id>
 			<url>https://nexus.bencodez.com/repository/maven-public/</url>
 		</repository>
-		<!-- Bundabrg's Repo -->
 		<repository>
-			<id>bundabrg-repo</id>
-			<url>https://repo.worldguard.com.au/repository/maven-public</url>
-			<releases>
-				<enabled>true</enabled>
-			</releases>
-			<snapshots>
-				<enabled>true</enabled>
-			</snapshots>
+			<id>sk89q-repo</id>
+			<url>https://maven.enginehub.org/repo</url>
 		</repository>
 		<!-- Jitpack -->
 		<repository>
