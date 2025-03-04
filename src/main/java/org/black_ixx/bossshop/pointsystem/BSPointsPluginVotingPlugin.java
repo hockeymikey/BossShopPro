@@ -1,6 +1,7 @@
 package org.black_ixx.bossshop.pointsystem;
 
-import com.Ben12345rocks.VotingPlugin.Objects.User;
+import com.bencodez.votingplugin.user.*;
+import com.bencodez.votingplugin.VotingPluginMain;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 
@@ -14,7 +15,8 @@ public class BSPointsPluginVotingPlugin extends BSPointsPlugin {
     @Override
     public double getPoints(OfflinePlayer player) {
         if (player instanceof Player) {
-            User user = new User((Player) player);
+        	
+        	VotingPluginUser user = VotingPluginMain.getPlugin().getVotingPluginUserManager().getVotingPluginUser(player);
             return user.getPoints();
         } else {
             return 0;
@@ -24,7 +26,7 @@ public class BSPointsPluginVotingPlugin extends BSPointsPlugin {
     @Override
     public double setPoints(OfflinePlayer player, double points) {
         if (player instanceof Player) {
-            User user = new User((Player) player);
+        	VotingPluginUser user = VotingPluginMain.getPlugin().getVotingPluginUserManager().getVotingPluginUser(player);
             user.setPoints((int) points);
             return points;
         } else {
@@ -35,7 +37,7 @@ public class BSPointsPluginVotingPlugin extends BSPointsPlugin {
     @Override
     public double takePoints(OfflinePlayer player, double points) {
         if (player instanceof Player) {
-            User user = new User((Player) player);
+        	VotingPluginUser user = VotingPluginMain.getPlugin().getVotingPluginUserManager().getVotingPluginUser(player);
             user.removePoints((int) points);
             return getPoints(player);
         } else {
@@ -46,7 +48,7 @@ public class BSPointsPluginVotingPlugin extends BSPointsPlugin {
     @Override
     public double givePoints(OfflinePlayer player, double points) {
         if (player instanceof Player) {
-            User user = new User((Player) player);
+        	VotingPluginUser user = VotingPluginMain.getPlugin().getVotingPluginUserManager().getVotingPluginUser(player);
             user.addPoints((int) points);
             return getPoints(player);
         } else {

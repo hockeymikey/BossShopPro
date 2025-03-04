@@ -21,7 +21,7 @@ public class SpawnersHandlerSilkSpawners implements ISpawnerHandler, ISpawnEggHa
         if (type == null) {
             return null;
         }
-        return util.newSpawnerItem(type.getTypeId(), null, i.getAmount(), false);
+        return util.newSpawnerItem(entityName, util.getCustomSpawnerName(entityName), i.getAmount(), false);
     }
 
     public ItemStack transformEgg(ItemStack i, String entityName) {
@@ -29,18 +29,18 @@ public class SpawnersHandlerSilkSpawners implements ISpawnerHandler, ISpawnEggHa
         if (type == null) {
             return null;
         }
-        return util.newEggItem(type.getTypeId(), entityName, i.getAmount());
+        return util.newEggItem(entityName, i.getAmount(), null);
     }
 
 
     public String readSpawner(ItemStack i) {
-        short entityid = util.getStoredSpawnerItemEntityID(i);
+        String entityid = util.getStoredSpawnerItemEntityID(i);
         String creaturename = util.getCreatureName(entityid);
         return creaturename;
     }
 
     public String readEgg(ItemStack i) {
-        short entityid = util.getStoredEggEntityID(i);
+    	String entityid = util.getStoredEggEntityID(i);
         String creaturename = util.getCreatureName(entityid);
         return creaturename;
     }

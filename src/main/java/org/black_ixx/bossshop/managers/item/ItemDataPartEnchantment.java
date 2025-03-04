@@ -1,6 +1,6 @@
 package org.black_ixx.bossshop.managers.item;
 
-import com.vk2gpz.tokenenchant.api.TokenEnchantAPI;
+import com.vk2gpz.tokenenchant.api.ITokenEnchant;
 import org.black_ixx.bossshop.core.BSBuy;
 import org.black_ixx.bossshop.managers.ClassManager;
 import org.black_ixx.bossshop.managers.misc.InputReader;
@@ -36,7 +36,7 @@ public class ItemDataPartEnchantment extends ItemDataPart {
         Enchantment e = InputReader.readEnchantment(enchantment);
 
         if (e == null && Bukkit.getPluginManager().isPluginEnabled("TokenEnchant")) {
-            TokenEnchantAPI te = TokenEnchantAPI.getInstance();
+        	ITokenEnchant te = ITokenEnchant.getInstance();
             item = te.enchant(null, item, enchantment, level, true, 0, false);
             return item;
         }

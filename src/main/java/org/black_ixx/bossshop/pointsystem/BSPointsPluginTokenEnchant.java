@@ -1,6 +1,7 @@
 package org.black_ixx.bossshop.pointsystem;
 
-import com.vk2gpz.tokenenchant.api.TokenEnchantAPI;
+import com.vk2gpz.tokenenchant.api.ITokenEnchant;
+import com.vk2gpz.tokenenchant.api.Addon;
 import org.bukkit.OfflinePlayer;
 
 
@@ -12,24 +13,24 @@ public class BSPointsPluginTokenEnchant extends BSPointsPlugin {
 
     @Override
     public double getPoints(OfflinePlayer player) {
-        return TokenEnchantAPI.getInstance().getTokens(player);
+        return ITokenEnchant.getInstance().getTokens(player);
     }
 
     @Override
     public double setPoints(OfflinePlayer player, double points) {
-        TokenEnchantAPI.getInstance().setTokens(player, points);
+    	ITokenEnchant.getInstance().setTokens(player, points);
         return points;
     }
 
     @Override
     public double takePoints(OfflinePlayer player, double points) {
-        TokenEnchantAPI.getInstance().removeTokens(player, points);
+    	ITokenEnchant.getInstance().removeTokens(player, points);
         return getPoints(player);
     }
 
     @Override
     public double givePoints(OfflinePlayer player, double points) {
-        TokenEnchantAPI.getInstance().addTokens(player, points);
+    	ITokenEnchant.getInstance().addTokens(player, points);
         return getPoints(player);
     }
 
